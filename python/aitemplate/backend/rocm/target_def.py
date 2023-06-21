@@ -121,6 +121,8 @@ class ROCM(Target):
             "-fvisibility=hidden",
             "-std=c++17",
             "-w",
+            "-mcumode",
+            "-mno-wavefrontsize64",
             "-DCK_TIME_KERNEL=0",
             "-Xclang -mlink-builtin-bitcode -Xclang {}/amdgcn/bitcode/oclc_abi_version_400.bc".format(
                 self._pkg_path()
@@ -300,6 +302,8 @@ class FBROCM(ROCM):
             "-fvisibility=hidden",
             "-std=c++17",
             "-w",
+            "-mcumode",
+            "-mno-wavefrontsize64",
             "-DCK_TIME_KERNEL=0",
             "--hip-version=5.2.0",
         ]

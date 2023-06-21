@@ -463,19 +463,26 @@ using {{name}} = {{op_type}}<
 // DeviceBatchedGemmXdl
 {% if op_type_value != 5 %}
     {{GemmSpecialization}},
-    // DeviceBatchedContractionMultipleD_Xdl_CShuffle + DeviceBatchedContractionMultipleD_Wmma_CShuffle  
-    {% if op_type_value in [8, 9] %}   
+    // DeviceBatchedContractionMultipleD_Wmma_CShuffle
+    {% if op_type_value == 9 %}
+    ck::tensor_operation::device::TensorSpecialization::Packed,
+    ck::tensor_operation::device::TensorSpecialization::Packed,
+    ck::tensor_operation::device::TensorSpecialization::Default,
+    {% else %}
+    // DeviceBatchedContractionMultipleD_Xdl_CShuffle
+        {% if op_type_value == 8 %}
     ck::tensor_operation::device::TensorSpecialization::Packed,
     ck::tensor_operation::device::TensorSpecialization::Packed,
     ck::tensor_operation::device::TensorSpecialization::Default,
     // DeviceBatchedGemmSoftmaxGemmPermute_Xdl_CShuffle
-    {% elif op_type_value == 11 %}
+        {% elif op_type_value == 11 %}
     ck::tensor_operation::device::TensorSpecialization::Default,
     ck::tensor_operation::device::TensorSpecialization::Default,
     ck::tensor_operation::device::TensorSpecialization::Default,
     ck::tensor_operation::device::TensorSpecialization::Default,
-    {% endif %}
+        {% endif %}
     1,
+    {% endif %}
 {% endif %}
     {{tile_config}}
     {{a_block_transfer}}

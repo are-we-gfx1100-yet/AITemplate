@@ -2527,3 +2527,7 @@ def GenerateGFX908(manifest, rocm_version):
 
 def GenerateGFX90A(manifest, rocm_version):
     GenerateTensorOp(manifest)
+
+
+def GenerateGFX1100(manifest, rocm_version):
+    GenerateTensorOp(manifest)

@@ -264,7 +264,7 @@ def benchmark_vae(
 @click.command()
 @click.option(
     "--local-dir",
-    default="./tmp/diffusers-pipeline/stabilityai/stable-diffusion-v2",
+    default="./tmp/diffusers-pipeline/runwayml/stable-diffusion-v1-5",
     help="the local diffusers pipeline directory",
 )
 @click.option("--batch-size", default=1, help="batch size")

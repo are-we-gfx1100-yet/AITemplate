@@ -18,7 +18,7 @@ if [ "$TARGET" = "cuda" ]; then
     docker build -f ./docker/Dockerfile.cuda -t ait .
 elif [ "$TARGET" = "rocm" ]; then
     echo "Building ROCM Docker Image with tag ait:latest"
-    docker build -f ./docker/Dockerfile.rocm -t ait .
+    docker build --network=host --build-arg HTTPS_PROXY=http://127.0.0.1:8888 --build-arg HTTP_PROXY=http://127.0.0.1:8888 --build-arg ALL_PROXY=http://127.0.0.1:8888 -f ./docker/Dockerfile.rocm -t ait .
 else
     echo "Unknown target"
 fi

@@ -92,6 +92,8 @@ def _detect_rocm():
             return "gfx90a"
         if "gfx908" in stdout:
             return "gfx908"
+        if "gfx1100" in stdout:
+            return "gfx1100"
         return None
     except Exception:
         return None

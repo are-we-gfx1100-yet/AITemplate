@@ -409,8 +409,8 @@ using {{name}} = {{op_type}}<
     float, // CShuffleDType
     ck::half_t,
     ck::half_t,
-// DeviceBatchedContractionMultipleD_Xdl_CShuffle + DeviceBatchedContractionMultipleD_Wmma_CShuffle
-{% elif op_type_value in [8, 9] %}
+// DeviceBatchedContractionMultipleD_Xdl_CShuffle
+{% elif op_type_value == 8 %}
     {% if gemm_kind == "gemm_permute_m2n3" %}
     1, 2, 3, 1, // permute m2n3
     {% elif gemm_kind == "gemm_permute_m3n2" %}
@@ -425,6 +425,23 @@ using {{name}} = {{op_type}}<
     {% else %}
     ck::Tuple<ck::half_t>,
     {% endif %}
+    ck::half_t,
+// DeviceBatchedContractionMultipleD_Wmma_CShuffle
+{% elif op_type_value == 9 %}
+    {% if gemm_kind == "gemm_permute_m2n3" %}
+    1, 2, 3, 1, // permute m2n3
+    {% elif gemm_kind == "gemm_permute_m3n2" %}
+    1, 3, 2, 1, // permute m3n2
+    {% endif %}
+    {{ADType}},
+    {{BDType}},
+    {% if "PassThrough" in C_elem_op %}
+    ck::Tuple<>,
+    {% else %}
+    ck::Tuple<ck::half_t>,
+    {% endif %}
+    ck::half_t,
+    {{AccDType}},
     ck::half_t,
 // DeviceBatchedGemmSoftmaxGemm_Xdl_CShuffle
 {% elif op_type_value == 10 %}

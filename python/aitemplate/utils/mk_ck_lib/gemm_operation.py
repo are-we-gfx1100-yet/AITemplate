@@ -355,8 +355,8 @@ using {{name}} = {{op_type}}<
     {{CDType}},
     {{AccDType}},
     {{CShuffleDType}},
-// DeviceGemmMultipleD_Xdl_CShuffle + DeviceGemmMultipleD_Wmma_CShuffle
-{% elif op_type_value in [3, 4] %}
+// DeviceGemmMultipleD_Xdl_CShuffle
+{% elif op_type_value == 3 %}
     {{ALayout}},
     {{BLayout}},
     ck::Tuple<{{DsLayout}}>, // DsLayout
@@ -367,6 +367,18 @@ using {{name}} = {{op_type}}<
     {{CShuffleDType}},
     ck::Tuple<{{DsDType}}>, // DsType
     {{CDType}},
+// DeviceGemmMultipleD_Wmma_CShuffle
+{% elif op_type_value == 4 %}
+    {{ALayout}},
+    {{BLayout}},
+    ck::Tuple<{{DsLayout}}>, // DsLayout
+    {{CLayout}},
+    {{ADType}},
+    {{BDType}},
+    ck::Tuple<{{DsDType}}>, // DsType
+    {{CDType}},
+    {{AccDType}},
+    {{CShuffleDType}},
 // DeviceBatchedGemmXdl
 {% elif op_type_value == 5 %}
     {{ADType}},

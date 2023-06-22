@@ -481,7 +481,9 @@ using {{name}} = {{op_type}}<
     ck::tensor_operation::device::TensorSpecialization::Default,
     ck::tensor_operation::device::TensorSpecialization::Default,
         {% endif %}
+        {% if op_type_value != 4 %}
     1,
+        {% endif %}
     {% endif %}
 {% endif %}
     {{tile_config}}
